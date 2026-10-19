@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^@'\nconst fs = require\\('fs'\\);\nconst path = require\\('path'\\);\nconst file = path\\.join\\(process\\.cwd\\(\\), 'index\\.html'\\);\nlet html = fs\\.readFileSync\\(file, 'utf8'\\);\nconst style = html\\.match\\(/<style>\\\\s\\*\\(\\[\\\\s\\\\S\\]\\*\\?\\)\\\\s\\*<\\\\/style>/\\);\nconst script = html\\.match\\(/<script>\\\\s\\*\\(\\[\\\\s\\\\S\\]\\*\\?\\)\\\\s\\*<\\\\/script>/\\);\nif \\(!style \\|\\| !script\\) throw new Error\\('Não foi possível localizar os blocos CSS e JavaScript esperados\\.'\\);\nfs\\.writeFileSync\\(path\\.join\\(process\\.cwd\\(\\), 'src', 'style', 'style\\.css'\\), style\\[1\\]\\.trim\\(\\) \\+ '\\\\n'\\);\nfs\\.writeFileSync\\(path\\.join\\(process\\.cwd\\(\\), 'src', 'js', 'index\\.js'\\), script\\[1\\]\\.trim\\(\\) \\+ '\\\\n'\\);\nhtml = html\\.replace\\(style\\[0\\], '<link rel=\"stylesheet\" href=\"src/style/style\\.css\">'\\);\nhtml = html\\.replace\\(script\\[0\\], '<script src=\"src/js/index\\.js\"></script>'\\);\nfs\\.writeFileSync\\(file, html\\);\n'@ \\| node$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
